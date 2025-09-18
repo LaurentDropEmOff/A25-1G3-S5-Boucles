@@ -13,37 +13,51 @@ def environnement_optimal(temp, poussiere, humidite):
     """
 
     alerte = False
+    for i in range(len(temp)):
+        # Vérification température
+        if temp[i] < 18:
+            print("Température trop basse")
+            alerte = True
+        elif temp[i] > 27:
+            print("Température trop élevée")
+            alerte = True
 
-    # Vérification température
-    if temp < 18:
-        print("Température trop basse")
-        alerte = True
-    elif temp > 27:
-        print("Température trop élevée")
-        alerte = True
+        # Vérification humidité
+        if humidite[i] <= 30:
+            print("Humidité trop basse")
+            alerte = True
+        elif humidite[i] >= 50:
+            print("Humidité trop élevée")
+            alerte = True
 
-    # Vérification humidité
-    if humidite <= 30:
-        print("Humidité trop basse")
-        alerte = True
-    elif humidite >= 50:
-        print("Humidité trop élevée")
-        alerte = True
+        # Vérification poussière
+        if poussiere[i] == "fort":
+            print("Trop de poussière")
+            alerte = True
+        elif poussiere[i] == "faible":
+            alerte = False
+        else:
+            print("Niveau de poussiere mal rentree")
 
-    # Vérification poussière
-    if poussiere != "faible":
-        print("Trop de poussière")
-        alerte = True
+        # Retour final
+        if not alerte:
+            print(f"Tout est sous contrôle pour l'otrdinateur {i}!")
+        else:
+            print("Environnement non optimal")
 
-    # Retour final
-    if not alerte:
-        return "Tout est sous contrôle!"
-    else:
-        return "Environnement non optimal"
+
 
 
 if __name__ == "__main__":
-    temp = float(input("Entrez la temperature : "))
-    poussiere = input("entrez le niveau de poussiere : ")
-    humidite = float(input("Entrez l'humidité' : "))
-    print(environnement_optimal(temp , poussiere, humidite))
+    nbrdordi = int(input("Combien d'ordinateurs?"))
+    liste_temp = []
+    liste_pou = []
+    liste_humi = []
+    for i in range(nbrdordi):
+        temp = float(input(f"Entrez la temperature de l'ordinateur {i+1} : "))
+        poussiere = input(f"entrez le niveau de poussiere de l'ordinateur {i+1} : ")
+        humidite = float(input(f"Entrez l'humidité' de l'ordinateur {i+1} : "))
+        liste_temp.append(temp)
+        liste_pou.append(poussiere)
+        liste_humi.append(humidite)
+environnement_optimal(liste_temp , liste_pou, liste_humi)
