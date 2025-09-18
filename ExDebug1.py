@@ -14,6 +14,7 @@ def environnement_optimal(temp, poussiere, humidite):
 
     alerte = False
     for i in range(len(temp)):
+
         # Vérification température
         if temp[i] < 18:
             print("Température trop basse")
@@ -21,6 +22,19 @@ def environnement_optimal(temp, poussiere, humidite):
         elif temp[i] > 27:
             print("Température trop élevée")
             alerte = True
+        else:
+            print(f"Niveau de temperature mal rentree pour l'ordinateur {i+1}")
+            while True:
+                if input("Reesayez de le rentrer pour cet ordinateur") < 18 :
+                    print("Température trop basse")
+                    alerte = True
+                    break
+                elif input("Reesayez de le rentrer pour cet ordinateur") > 27 :
+                    print("Température trop élevée")
+                    alerte = True
+                    break
+                else:
+                    print("Encore mal rentree. Ressayez.")
 
         # Vérification humidité
         if humidite[i] <= 30:
@@ -29,6 +43,19 @@ def environnement_optimal(temp, poussiere, humidite):
         elif humidite[i] >= 50:
             print("Humidité trop élevée")
             alerte = True
+        else:
+            print(f"Niveau d'humidite mal rentree pour l'ordinateur {i+1}")
+            while True:
+                if input("Reesayez de le rentrer pour cet ordinateur") <= 30 :
+                    print("Humidité trop basse")
+                    alerte = True
+                    break
+                elif input("Reesayez de le rentrer pour cet ordinateur") >= 50 :
+                    print("Humidité trop élevée")
+                    alerte = True
+                    break
+                else:
+                    print("Encore mal rentree. Ressayez.")
 
         # Vérification poussière
         if poussiere[i] == "fort":
@@ -37,7 +64,18 @@ def environnement_optimal(temp, poussiere, humidite):
         elif poussiere[i] == "faible":
             alerte = False
         else:
-            print("Niveau de poussiere mal rentree")
+            print(f"Niveau de poussiere mal rentree pour l'ordinateur {i+1}")
+            while True:
+                if input("Reesayez de le rentrer pour cet ordinateur") == "fort":
+                    print("Trop de poussière")
+                    alerte = True
+                    break
+                elif input("Reesayez de le rentrer pour cet ordinateur") == "faible":
+                    alerte = False
+                    break
+                else:
+                    print("Encore mal rentree. Ressayez.")
+
 
         # Retour final
         if not alerte:
